@@ -25,7 +25,7 @@ if ($_POST) {
 
   <body>
     <?php include_once('barrademenu.php'); ?>
-
+asdasdas
     <div class="formulario">
 
 
