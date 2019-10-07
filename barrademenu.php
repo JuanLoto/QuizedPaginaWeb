@@ -1,8 +1,5 @@
 <?php
-
-
-
- ?>
+?>
 
 
  <!DOCTYPE html>
@@ -36,7 +33,7 @@
              <b>PREGUNTAS FRECUENTES</b>
            </a>
            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <a class="dropdown-item" href="preguntas.php #1"">¿Necesito estar registrado?</a>
+             <a class="dropdown-item" href="preguntas.php #1">¿Necesito estar registrado?</a>
              <a class="dropdown-item" href="preguntas.php #2">¿Cómo puedo conseguir más puntos?</a>
              <a class="dropdown-item" href="preguntas.php #3">¿Qué son los retos?</a>
              <a class="dropdown-item" href="preguntas.php #4">¿Cómo funcionan los puntos en los retos?</a>
@@ -47,8 +44,33 @@
 
            </div>
          </li>
+
+         <?php if ($_SESSION): ?>
+
+           <li class=nav-item active>
+             <img src="fotos/<?=$_SESSION["foto"]?>" width="50" height="50" alt="Foto de perfil">
+           </li>
+
+           <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#"  style="color:white;"id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <b>Hola, <?=$_SESSION["nombre"]. " " .$_SESSION["apellido"]?></b>
+             </a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <a class="dropdown-item" href="#">Mi Cuenta</a>
+               <a class="dropdown-item" href="#">Estadisticas</a>
+               <a class="dropdown-item" href="#">Panel de Control</a>
+               <a class="dropdown-item" href="cerrarsesion.php">Cerrar Sesion</a>
+
+             </div>
+           </li>
+
+
+
+         <?php endif; ?>
        </ul>
-       <span class="navbar-text"><a class="nav-link" href="iniciarsesion.php" style="color:white;"><b>INICIAR SESIÓN</b></a></span>
+       <?php if ($_SESSION == null): ?>
+        <span class="navbar-text"><a class="nav-link" href="iniciarsesion.php" style="color:white;"><b>INICIAR SESIÓN</b></a></span>
+       <?php endif; ?>
      </div>
      </nav>
    </header>

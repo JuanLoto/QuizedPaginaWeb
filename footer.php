@@ -47,7 +47,7 @@
 
             <ul class="list-unstyled">
               <li>
-                <a ><img src="image/jfb.png" style="width:100%"</a>
+                <a ><a href="#"><img src="image/jfb.png" style="width:100%"</a></a>
               </li>
 
 
@@ -64,7 +64,7 @@
 
             <ul class="list-unstyled">
               <li>
-              <a ><img src="image/app.jpg" style="width:100%"</a>
+              <a><a href="#"><img src="image/app.jpg" style="width:100%"</a></a>
               </li>
 
             </ul>

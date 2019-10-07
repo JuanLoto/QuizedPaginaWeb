@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +74,8 @@
         </div>
       </div>
     </section>
-    
+
+
     <footer>
           <?php include_once('footer.php') ?>
     </footer>

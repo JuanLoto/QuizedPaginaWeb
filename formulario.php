@@ -1,18 +1,23 @@
 <?php
-include_once('funciones.php');
+ session_start();
+ require_once('funciones.php');
 
-if ($_POST) {
-  $errores = validar($_POST);
-  if (count($errores) == 0) {
-      $usuario = armarUsuario($_POST);
-      guardarUsuario($usuario);
-     header("Location:baseDeDatos2.php");
-    exit;
-  }
-}
+ if (recordardatos("nombre") || recordardatos("apellido") || recordardatos("email") || recordardatos("contraseña") || recordardatos("contraseña2")) {
 
- ?>
+   validarregistro($_POST);
 
+
+   if (imprimirerrores("nombre") == null && imprimirerrores("apellido") == null && imprimirerrores("email") == null && imprimirerrores("contraseña") == null && imprimirerrores("contraseña2") == null && imprimirerrores("foto") == null) {
+     $foto = armarimagen($_FILES);
+     $usuario = armarusuario($_POST, $foto);
+     guardarusuario($usuario);
+     header("Location: iniciarsesion.php");
+     exit;
+   }
+
+ }
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,38 +30,58 @@ if ($_POST) {
 
   <body>
     <?php include_once('barrademenu.php'); ?>
-asdasdas
+
     <div class="formulario">
 
+    <div class="reg">
 
-
-  <!-- <ul>
-   <?php foreach ($errores as $valor => $error): ?>
-       <li class="alert alert-danger"><?=$error?></li>
-   <?php endforeach; ?>
-   </ul> -->
-<div class="reg">
-
-  <form class="registro" action="home.php" method="post" >
+  <form class="registro" action="formulario.php" method="post"  enctype="multipart/form-data">
     <h2>Registrate para poder ingresar</h2>
-    <label for="nombre">Nombre:</label>
-    <br>
-    <input class="formu" type="text" name="nombre"><br>
+
+    <label for="nombre">Nombre:</label><br>
+    <?=imprimirerrores("bordenombre")?>
+    <input class="nombre bordenombre" type="text" name="nombre" value="<?=recordardatos("nombre")?>"><br>
+    <span class="mensajeerrornombre"><?=imprimirerrores("nombre")?></span><br>
+
+
     <label for="apellido">Apellido</label><br>
-    <input class="formu" type="text" name="apellido" ><br>
+    <?=imprimirerrores("bordeapellido")?>
+
+    <input class="apellido bordeapellido" type="text" name="apellido" value="<?=recordardatos("apellido")?>"><br>
+    <span class="mensajeerrorapellido"><?=imprimirerrores("apellido")?></span><br>
+
+
     <label for="email">Email:</label><br>
-    <input class="formu" type="email" name="email">
-    <br>
-    <label for="contrasenia">Contraseña:</label><br>
-    <input class="formu" type="password" name="contrasenia">
-    <br>
-    <label for="recontras">Confirmar Contraseña:</label><br>
-    <input class="formu" type="password" name="contrasenia1"><br>
+
+    <input class="email bordeemail" type="email" name="email" value="<?=recordardatos("email")?>"><br>
+    <span class="mensajeerroremail"><?=imprimirerrores("email")?></span><br>
+
+
+    <label for="contraseña">Contraseña:</label><br>
+
+
+    <input class="contraseña bordecontraseña" type="password" name="contraseña" value="<?=recordardatos("contraseña")?>"><br>
+    <span class="mensajeerrorcontraseña"><?=imprimirerrores("contraseña")?></span><br>
+
+
+    <label for="contraseña2">Confirmar Contraseña:</label><br>
+
+
+    <input class="contraseña2 bordecontraseña2" type="password" name="contraseña2" value="<?=recordardatos("contraseña2")?>"><br>
+    <span class="mensajeerrorcontraseña2"><?=imprimirerrores("contraseña2")?></span><br>
+
+
     <label for="sexo">Sexo:</label>
-    <input class="formu" type="radio" name="sexo" value="F">Fenemino
-    <input class="formu" type="radio" name="sexo" value="M">Masculino
+    <input class="femenino" type="radio" name="sexo" value="F">Femenino
+    <input class="Masculino" type="radio" name="sexo" value="M">Masculino
     <br>
-    <button type="submit" name="button">Enviar Formulario</button><br>
+
+
+
+    <input class="bordefoto" type="file" name="foto" ><br><br>
+    <span class="mensajeerrorfoto"><?=imprimirerrores("foto")?></span><br>
+
+    <button type="submit" name="button">Enviar Formulario</button>
 
 
 </form>

@@ -1,6 +1,18 @@
 <?php
+ session_start();
+ require_once('funciones.php');
 
+ if (recordardatos("emaillogin") || recordardatos("contrasenalogin")) {
 
+   validarlogin($_POST);
+
+   if (imprimirerrores("emaillogin") == null && imprimirerrores("contrasenalogin") == null) {
+     $usuario = buscarporemail($_POST["emaillogin"]);
+     iniciosesion($usuario);
+     header("Location: home.php");
+     exit;
+   }
+ }
 
  ?>
 
@@ -19,16 +31,20 @@
 
      <?php include_once('barrademenu.php'); ?>
 
-    <form class="sesion" action="jugar.php" method="post">
+    <form class="sesion" action="iniciarsesion.php" method="post">
       <h2>Inicia Sesion</h2>
-      <input type="text" placeholder="&#128272; Usuario" name="usuario"><br>
-      <input type="password" placeholder="&#128272; Contraseña" name="contraseña"><br>
-      <input type="submit" name="" value="Iniciar Sesión"><br>
-      <input class="checkbox-rmbr" type="checkbox" name="" value="">RECORDARME<br>
 
+      <input type="text" placeholder="&#128272; Usuario" name="emaillogin"><br>
+
+      <input type="password" placeholder="&#128272; Contraseña" name="contrasenalogin"><br>
+
+      <?=imprimirerrores("mensajeerrorlogin")?>
+      <span class="mensajeerrorlogin"><?=imprimirerrores("emaillogin")?><?=imprimirerrores("contrasenalogin")?></span>
+
+      <input type="submit" name="" value="Iniciar Sesion"><br>
       <a href="#">¿Olvidó su contraseña?</a>
       <a class="registrarse"href="formulario.php">Registrarse</a><br><br>
-      <a href="home.php">Regresar al home</a>
+      <a href="home.php">Regresar al menu</a>
     </form>
 
     <footer>

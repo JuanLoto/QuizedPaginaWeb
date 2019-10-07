@@ -27,12 +27,6 @@ body {
                 height: 50px
 }
 
-.sesion .checkbox-rmbr{
-  width:10%;
-  height:15px;
-  margin:2px;
-}
-
 h2  {
      text-align: center;
      margin-bottom: 20px;
@@ -101,6 +95,8 @@ input submit {
   text-align: center;
   text-decoration: underline;
 }
+
+
 /* fin de jugar .php */
 
 
